@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INFORMS ATS Aviation Webinar Series</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:    #0a1628;
+      --deep:    #0d2045;
+      --mid:     #1a3a6e;
+      --sky:     #2f7abf;
+      --accent:  #4eaee8;
+      --light:   #e8f4fc;
+      --white:   #ffffff;
+      --gold:    #c9a84c;
+      --text:    #1c2c44;
+      --muted:   #5a7a9a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── Hero ─────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      background: linear-gradient(160deg, var(--navy) 0%, var(--deep) 45%, var(--mid) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px 80px;
+      overflow: hidden;
+    }
+
+    /* Animated dotted grid */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(79,174,232,.18) 1px, transparent 1px);
+      background-size: 36px 36px;
+      animation: gridShift 20s linear infinite;
+    }
+
+    @keyframes gridShift {
+      0%   { background-position: 0 0; }
+      100% { background-position: 72px 72px; }
+    }
+
+    /* Diagonal sweep */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0; right: 0;
+      height: 90px;
+      background: var(--white);
+      clip-path: polygon(0 100%, 100% 0, 100% 100%);
+    }
+
+    .hero-logo {
+      position: relative;
+      z-index: 2;
+      margin-bottom: 36px;
+    }
+
+    .hero-logo img {
+      max-width: 360px;
+      width: 85%;
+      filter: brightness(0) invert(1);
+      opacity: 0.95;
+      animation: fadeDown .9s ease both;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: .95; transform: translateY(0); }
+    }
+
+    .hero-plane {
+      font-size: 3.2rem;
+      position: relative;
+      z-index: 2;
+      animation: planeIn 1.2s cubic-bezier(.22,1,.36,1) both .2s;
+      letter-spacing: 4px;
+      margin-bottom: 20px;
+    }
+
+    @keyframes planeIn {
+      from { opacity: 0; transform: translateX(-60px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.6rem, 6vw, 5rem);
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.12;
+      position: relative;
+      z-index: 2;
+      animation: fadeUp .9s ease both .3s;
+      letter-spacing: -0.5px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: rgba(255,255,255,.72);
+      margin-top: 16px;
+      position: relative;
+      z-index: 2;
+      animation: fadeUp .9s ease both .45s;
+      letter-spacing: .3px;
+      max-width: 540px;
+    }
+
+    .hero-badges {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 32px;
+      position: relative;
+      z-index: 2;
+      animation: fadeUp .9s ease both .6s;
+    }
+
+    .badge {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.25);
+      backdrop-filter: blur(4px);
+      color: var(--white);
+      padding: 8px 18px;
+      border-radius: 99px;
+      font-size: .82rem;
+      font-weight: 500;
+      letter-spacing: .4px;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── About strip ──────────────────────────────────── */
+    .about {
+      background: var(--white);
+      padding: 80px 24px 72px;
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .section-label {
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: 2.8px;
+      text-transform: uppercase;
+      color: var(--sky);
+      margin-bottom: 14px;
+    }
+
+    .about h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--navy);
+      margin-bottom: 24px;
+    }
+
+    .about p {
+      font-size: 1.06rem;
+      line-height: 1.78;
+      color: #3d5470;
+      max-width: 720px;
+      margin: 0 auto 16px;
+    }
+
+    .about a {
+      color: var(--sky);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+      transition: color .2s;
+    }
+
+    .about a:hover { color: var(--accent); }
+
+    /* ── Divider ──────────────────────────────────────── */
+    .divider {
+      width: 56px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--sky), var(--accent));
+      border-radius: 2px;
+      margin: 0 auto 40px;
+    }
+
+    /* ── Topics grid ──────────────────────────────────── */
+    .topics-section {
+      background: linear-gradient(175deg, #f4f9fd 0%, #eaf3fb 100%);
+      padding: 80px 24px 88px;
+    }
+
+    .topics-section .inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .topics-section .header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .topics-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .topics-section .subtitle {
+      color: var(--muted);
+      font-size: .97rem;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 20px;
+    }
+
+    .topic-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 28px 26px;
+      box-shadow: 0 2px 16px rgba(10,22,40,.06);
+      border-top: 3px solid transparent;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .topic-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(47,122,191,.04), transparent);
+      pointer-events: none;
+    }
+
+    .topic-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px rgba(10,22,40,.12);
+      border-color: var(--sky);
+    }
+
+    .topic-icon {
+      font-size: 1.7rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .topic-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.22rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+
+    .topic-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .topic-card ul li {
+      font-size: .87rem;
+      color: #4a6880;
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.45;
+    }
+
+    .topic-card ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 7px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .tag-traditional {
+      border-top-color: var(--sky);
+    }
+
+    .tag-contemporary {
+      border-top-color: var(--gold);
+    }
+
+    .tag-contemporary h3 { color: #6b4c00; }
+    .tag-contemporary ul li::before { background: var(--gold); }
+
+    /* Category pill */
+    .cat-pill {
+      display: inline-block;
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 99px;
+      margin-bottom: 10px;
+    }
+
+    .pill-trad {
+      background: rgba(47,122,191,.1);
+      color: var(--sky);
+    }
+
+    .pill-cont {
+      background: rgba(201,168,76,.12);
+      color: #8a6e20;
+    }
+
+    /* ── CTA section ──────────────────────────────────── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--mid) 100%);
+      padding: 88px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '✈';
+      position: absolute;
+      font-size: 22rem;
+      opacity: .03;
+      right: -3rem;
+      bottom: -4rem;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .cta-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-section p {
+      color: rgba(255,255,255,.7);
+      font-size: 1.02rem;
+      max-width: 580px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-contacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .95rem;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background .2s, transform .2s;
+      letter-spacing: .2px;
+    }
+
+    .cta-btn:hover {
+      background: #3a9cd8;
+      transform: translateY(-2px);
+    }
+
+    .cta-btn.outline {
+      background: transparent;
+      border: 2px solid rgba(255,255,255,.4);
+      color: var(--white);
+    }
+
+    .cta-btn.outline:hover {
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.7);
+    }
+
+    /* ── Footer ───────────────────────────────────────── */
+    footer {
+      background: var(--navy);
+      border-top: 1px solid rgba(255,255,255,.07);
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    footer img {
+      max-width: 220px;
+      filter: brightness(0) invert(1);
+      opacity: .5;
+      margin-bottom: 16px;
+    }
+
+    footer p {
+      font-size: .82rem;
+      color: rgba(255,255,255,.35);
+      line-height: 1.6;
+    }
+
+    footer a {
+      color: rgba(255,255,255,.55);
+      text-decoration: none;
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    /* ── Responsive ───────────────────────────────────── */
+    @media (max-width: 600px) {
+      .hero { padding: 50px 20px 70px; }
+      .hero-plane { font-size: 2.4rem; }
+      .topics-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HERO ──────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-logo">
+    <img
+      src="https://higherlogicdownload.s3.amazonaws.com/INFORMS/90fefc85-329e-44f0-8a07-2cd43ce25815/UploadedImages/Horizontal_Web_Full_Color_INFORMS_Air_Transportation_Logo.png"
+      alt="INFORMS Air Transportation Section"
+    />
+  </div>
+
+  <div class="hero-plane">✈</div>
+
+  <h1>Aviation <em>Webinar</em><br>Series</h1>
+  <p class="hero-sub">by INFORMS Air Transportation Section (ATS)</p>
+
+  <div class="hero-badges">
+    <span class="badge">📅 Bi-Monthly</span>
+    <span class="badge">🌍 Global Audience</span>
+    <span class="badge">🎓 Since 2023</span>
+    <span class="badge">🔬 OR &amp; Analytics</span>
+  </div>
+</section>
+
+<!-- ── ABOUT ──────────────────────────────────────────────── -->
+<section class="about">
+  <p class="section-label">About the Series</p>
+  <h2>Where Aviation Meets Analytics</h2>
+  <div class="divider"></div>
+  <p>
+    The Aviation Webinar Series is a <strong>bi-monthly event</strong> bringing together
+    renowned academics and practitioners in the field of Aviation &amp; Analytics.
+    Initiated in 2023, the series provides a unique platform for industry professionals
+    and researchers to <strong>showcase their work</strong> to a global target audience of
+    aviation enthusiasts, engage in discussions, and receive valuable feedback.
+  </p>
+  <p>
+    Our webinars focus on OR applications in aviation, covering topics such as Advanced Air
+    Mobility, Airline and Airport Operations, and Sustainable Aviation.
+    A list of past webinars can be found at
+    <a href="https://connect.informs.org/aas/webinars" target="_blank">connect.informs.org/aas/webinars</a>.
+  </p>
+</section>
+
+<!-- ── TOPICS ─────────────────────────────────────────────── -->
+<section class="topics-section">
+  <div class="inner">
+    <div class="header">
+      <p class="section-label">Topics of Interest</p>
+      <h2>What We Cover</h2>
+      <p class="subtitle">
+        The list below is illustrative and not exhaustive or ranked by priority —
+        we welcome all innovative OR applications in aviation.
+      </p>
+    </div>
+
+    <div class="topics-grid">
+
+      <!-- Traditional: ATM -->
+      <div class="topic-card tag-traditional">
+        <span class="cat-pill pill-trad">Traditional</span>
+        <span class="topic-icon">🗺️</span>
+        <h3>Air Traffic Management</h3>
+        <ul>
+          <li>Urban Traffic Management (UTM)</li>
+          <li>Air Traffic Flow Management (ATFM)</li>
+          <li>Trajectory-Based Operations (TBO)</li>
+          <li>Air Traffic Control (ATC)</li>
+        </ul>
+      </div>
+
+      <!-- Traditional: Airline -->
+      <div class="topic-card tag-traditional">
+        <span class="cat-pill pill-trad">Traditional</span>
+        <span class="topic-icon">✈️</span>
+        <h3>Airline Operations Research</h3>
+        <ul>
+          <li>Aircraft Maintenance</li>
+          <li>Revenue Mgmt &amp; Dynamic Pricing</li>
+          <li>Fleet &amp; Crew Scheduling</li>
+          <li>Tail Assignment</li>
+          <li>Delay &amp; Disruption Management</li>
+        </ul>
+      </div>
+
+      <!-- Traditional: Airport -->
+      <div class="topic-card tag-traditional">
+        <span class="cat-pill pill-trad">Traditional</span>
+        <span class="topic-icon">🏛️</span>
+        <h3>Airport Operations Research</h3>
+        <ul>
+          <li>Airside / Landside Operations</li>
+          <li>Airport Slot Allocation</li>
+          <li>Runway Optimization</li>
+          <li>Arrival Sequencing</li>
+        </ul>
+      </div>
+
+      <!-- Traditional: Human Factors -->
+      <div class="topic-card tag-traditional">
+        <span class="cat-pill pill-trad">Traditional</span>
+        <span class="topic-icon">🧠</span>
+        <h3>Human Factors</h3>
+        <ul>
+          <li>Fatigue in Aviation &amp; Aerospace</li>
+          <li>Pilot Cognitive Workload</li>
+          <li>Human Systems Integration</li>
+        </ul>
+      </div>
+
+      <!-- Contemporary: AAM -->
+      <div class="topic-card tag-contemporary">
+        <span class="cat-pill pill-cont">Contemporary</span>
+        <span class="topic-icon">🚁</span>
+        <h3>Advanced Air Mobility &amp; Drones</h3>
+        <ul>
+          <li>Urban Air Mobility (UAM)</li>
+          <li>Uncrewed Aircraft Systems (UAS)</li>
+          <li>Vertical Take-Off and Landing (VTOL)</li>
+          <li>Vertiports</li>
+        </ul>
+      </div>
+
+      <!-- Contemporary: AI -->
+      <div class="topic-card tag-contemporary">
+        <span class="cat-pill pill-cont">Contemporary</span>
+        <span class="topic-icon">🤖</span>
+        <h3>AI in Aviation</h3>
+        <ul>
+          <li>Digital Twinning</li>
+          <li>Machine Learning Models</li>
+          <li>Quantum Computing &amp; Information</li>
+          <li>Human-in-the-Loop AI</li>
+          <li>Human-Automation Teaming</li>
+        </ul>
+      </div>
+
+      <!-- Contemporary: Sustainable -->
+      <div class="topic-card tag-contemporary">
+        <span class="cat-pill pill-cont">Contemporary</span>
+        <span class="topic-icon">🌿</span>
+        <h3>Sustainable Aviation</h3>
+        <ul>
+          <li>Sustainable Aviation Fuels (SAF)</li>
+          <li>Hydrogen Systems &amp; Infrastructure</li>
+          <li>Net-Zero Emission Aviation</li>
+          <li>Climate-Optimal Trajectories</li>
+        </ul>
+      </div>
+
+      <!-- Contemporary: Future -->
+      <div class="topic-card tag-contemporary">
+        <span class="cat-pill pill-cont">Contemporary</span>
+        <span class="topic-icon">🚀</span>
+        <h3>Future of Aviation</h3>
+        <ul>
+          <li>Future Trends in Aviation &amp; Aerospace</li>
+          <li>Commercial Space Flight</li>
+          <li>Autonomous Aircraft</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ────────────────────────────────────────────────── -->
+<section class="cta-section">
+  <h2>Interested in Presenting?</h2>
+  <p>
+    We are always looking for passionate speakers — whether you are an academic researcher
+    or an industry practitioner. Join our global community and share your work with aviation
+    enthusiasts worldwide.
+  </p>
+  <div class="cta-contacts">
+    <a href="mailto:AAS_SEC@informs.org" class="cta-btn">
+      ✉ Contact the ATS Team
+    </a>
+    <a href="https://connect.informs.org/aas/webinars" target="_blank" class="cta-btn outline">
+      🔗 Past Webinars
+    </a>
+    <a href="https://connect.informs.org/aas/home" target="_blank" class="cta-btn outline">
+      🌐 Visit ATS Website
+    </a>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+<footer>
+  <img
+    src="https://higherlogicdownload.s3.amazonaws.com/INFORMS/90fefc85-329e-44f0-8a07-2cd43ce25815/UploadedImages/Horizontal_Web_Full_Color_INFORMS_Air_Transportation_Logo.png"
+    alt="INFORMS Air Transportation Section"
+  />
+  <p>
+    INFORMS Air Transportation Section (ATS) &nbsp;|&nbsp;
+    <a href="mailto:AAS_SEC@informs.org">AAS_SEC@informs.org</a><br/>
+    <a href="https://connect.informs.org/aas/home" target="_blank">connect.informs.org/aas</a>
+    &nbsp;|&nbsp; © INFORMS. All Rights Reserved.
+  </p>
+</footer>
+
+</body>
+</html>
