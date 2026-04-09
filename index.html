@@ -22,23 +22,23 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
+      margin: 0;
       font-family: 'DM Sans', sans-serif;
       background: var(--white);
       color: var(--text);
-      overflow-x: hidden;
     }
 
     /* ── Hero ─────────────────────────────────────────── */
     .hero {
       position: relative;
-      min-height: 100vh;
+      min-height: auto;
+      padding: 120px 24px 140px;
       background: linear-gradient(160deg, var(--navy) 0%, var(--deep) 45%, var(--mid) 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 60px 24px 80px;
       overflow: hidden;
     }
 
